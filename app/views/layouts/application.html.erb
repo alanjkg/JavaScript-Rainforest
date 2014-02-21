@@ -18,14 +18,30 @@
     <% if flash[:alert] %>
       <p id="alert"><%= flash[:alert] %></p>
     <% end %>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to "Rainforest", root_url %>
 
+      <section class="top-bar-section">
+        <div class="right">
     <%= javascript_include_tag "application" %>
     <p class="userinfo">
+
+
       <% if current_user %>
-        Signed in as <%= current_user.name %>(<%= current_user.email %>) <%= link_to "Log out ", session_path("current"), :method => :delete %>
+
+
+        Signed in as <%= current_user.name %> (<%= current_user.email %>)
+        <br />
+
+        <%= link_to "Log out ", session_path("current"), :method => :delete %>
       <% else %>
-        <%= link_to "Log in", new_session_path %> or <%= link_to "Sign up", new_user_path %>
+        <%= link_to "Log in", new_session_path %> | <%= link_to "Sign up", new_user_path%>
       <% end %>
+    </div>
+  </section>
+      </nav>
       <%= yield %>
     </p>
   </body>
