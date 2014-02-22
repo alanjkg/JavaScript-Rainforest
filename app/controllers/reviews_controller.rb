@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
 
   before_filter :load_product
   #so that there's always a product loaded
-  before_filter :ensure_logged_in, :only => [:show, :create, :show, :update, :destroy]
+  before_filter :ensure_logged_in, :only => [:show, :create, :update, :destroy]
   #only ensure logged in for the methods in the hash.
 
   def show
@@ -21,13 +21,16 @@ class ReviewsController < ApplicationController
     #   :product_id => @product.id,
     #   :user_id    => current_user.id
     # )
-
+    respond_to do |format|
     if @review.save
-      redirect_to products_path, notice: 'Review created successfully'
+      format.html { redirect_to product_path(@product.id), notice: 'Review Added.'}
+      format.js {} # This will look  for app/views/reviews/create.js.erb
     else
-      render :action => :show
+      format.html { render 'products/show', alert: 'There was an error.' }
+      format.js {} #this will look for app/views/reviews/create.js.erb
     end
   end
+end
 
   def destroy
     @review = Review.find(params[:id])
