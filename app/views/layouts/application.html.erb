@@ -18,31 +18,43 @@
     <% if flash[:alert] %>
       <p id="alert"><%= flash[:alert] %></p>
     <% end %>
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to "Rainforest", root_url %>
+    <div class="fixed">
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to "Rainforest", root_url %></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+  </ul>
 
-      <section class="top-bar-section">
-        <div class="right">
-    <%= javascript_include_tag "application" %>
-    <p class="userinfo">
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
 
-
+    <ul class="right">
+      <li class="active"><%= link_to "New product", new_product_path %></li>
       <% if current_user %>
-
-
-        Signed in as <%= current_user.name %> (<%= current_user.email %>)
-        <br />
-
-        <%= link_to "Log out ", session_path("current"), :method => :delete %>
+        <li class="active"> <font color = white>Signed in as <%= current_user.name %> (<%= current_user.email %>)</font>
+        <li class="active"><%= link_to "Log out", session_path("current"), method: :delete %></li>
       <% else %>
-        <%= link_to "Log in", new_session_path %> | <%= link_to "Sign up", new_user_path%>
+        <li class="active"><%= link_to "Sign up", new_user_path %></li>
+        <li class="active"><%= link_to "Log in", new_session_path %></li>
       <% end %>
-    </div>
+
+<!--       <li class="has-dropdown">
+        <a href="#">Right Button with Dropdown</a>
+        <ul class="dropdown">
+          <li><a href="#">First link in dropdown</a></li>
+        </ul>
+      </li> -->
+    </ul>
+
+    <!-- Left Nav Section -->
+
   </section>
-      </nav>
+</nav>
+  </div>
+    <%= javascript_include_tag "application" %>
+
       <%= yield %>
-    </p>
   </body>
 </html>

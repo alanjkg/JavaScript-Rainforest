@@ -4,7 +4,22 @@ class ProductsController < ApplicationController
   #only ensure logged in for show.
 
   def index
-    @products = Product.all
+     @products = if params[:search]
+       Product.where("name LIKE?", "%#{params[:search]}%").page(params[:page])
+
+     else
+        Product.order('products.created_at DESC').page(params[:page])
+     end
+
+     respond_to do |format|
+       format.js
+       format.html
+     end
+   end
+
+   def search
+     @products = Product.where("name LIKE?", "%#{params[:search]}%")
+     render @products
   end
 
   def show

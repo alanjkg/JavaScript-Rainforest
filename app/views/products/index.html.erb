@@ -1,9 +1,31 @@
+<br>
+<br>
 <h1> Products (<%= @products.length %>)</h1>
-<%= link_to "New Product", "/products/new" %>
 
-<% @products.each do |product| %>
-<p><%= product.name %>, <%= product.description %>, <%= product.formatted_price %></p>
-<%= link_to (image_tag product.url, width: '200'), product %>
+<%= form_tag products_path, method: :get, authentication: false, id: 'search-form' do %>
+<div class ="small-2 columns"><%= text_field_tag :search, params[:search] %>
+<%= submit_tag "Search" %>
+</div>
 <% end %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- renders a helpful message with numbers of displayed vs. total entries -->
+<h1>Products <small><%= page_entries_info @products %></small></h1>
+
+<hr/>
+
+<ul>
+
+  <div id="products">
+  	<%= render @products %>
+  </div>
+</ul>
+
+<!-- outputs several pagination links such as « First ‹ Prev ... 2 3 4 5 6 7 8 9 10 ... Next › Last » -->
+<p id="products-pagination"><%= paginate @products %></p>
 
 <!--@product[:name] and @product[:description] is the same as @product.name and @product.description-->
+

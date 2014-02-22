@@ -39,6 +39,10 @@ end
 
  gem 'foundation-rails'
 
+ # For pagination
+gem 'kaminari'
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
